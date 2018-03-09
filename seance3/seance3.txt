@@ -1,0 +1,56 @@
+Séance 3 - TRIVA
+
+Compression <--> Détection de détails importants
+Donc compression permet aussi de construire des modèles analytiques sur des images.
+Information, compression...
+
+------Traitement de l'information : compression --------
+
+Claude Shanon : a pensé l'information de manière mathématique plutôt que philosophique
+Information a un lien avec les stat et l'apprentissage (cf cours Stéphane Mallat).
+Bref, on va parler de théorie de l'information et de codage. On va comprendre comment fonctionne jpeg.
+
+	Supposons qu'on veuille transmettre du texte, le plus efficacement possible. Supposons qu'on puisse prendre chaque lettre de l'aphabet et qu'on lui associe un codage. Binaire dans le cas de l'informatique.
+
+--> On veut le message le plus court possible pour le pire message possible ("zzzzzz.....").
+	
+	Le principe c'est qu'on va utiliser des encodages + courts pour les lettres les plus fréquentes : ainsi l'esperance de l'encodage sera petite.
+On veut aussi utiliser un marqueur d'espace, virgule...
+
+--> Cadre théorique :
+
+	On suppose qu'on a un alphabet de symbole et une source qui produit une séquence de symbole : cette source est une VAR X qui a une distribution, qui distribue les lettres selon une distribution de proba.
+
+	La source est un processus stochastique. Les Xn sont iid et suivent la même loi que la VAR X. Chaque symbole xk a une proba d'apparition pk.
+On veut minimiser l'esperance de la longueur de l'encodage. l(w) est la longueur du mot, l(c(xk)) est la longueur de l'encodage de x pour le code c. Donc on veut trouver le bon codage c tel qu'on minimise l'esperance.
+
+	Avec la LFGN, on peut garantir que quand la longueur du document augmente, on aura en moyenne, avec peu de variation, un code de taille fixée (égal à l'esperance).
+
+--> Typologie des codes :
+a = 10
+b = 01
+c = 1
+
+	110 = ca mais 1101 = ?? --> plusieurs manière de décodér cela ------> D'où le besoin d'avoir un codage univoque.
+	
+	Mot = séquence binaire qui renvoie une lettre
+
+	Code univoque : Si on peut encoder une seule séquence de symbole avec un même code (1101 = aba seulement).
+
+	Code instantanné : lorsqu'on voit une séquence et qu'il est possible de déterminer si ce code est terminé
+
+	Code préfixe : si aucun mot du code n'est préfixe d'un autre mot du code.
+
+	Code suffixe : code préfixe à l'envers.
+
+	Voir la représentation en arbre. Préfixe --> Instantanné --> Univoque. La représentation en arbre permet de décoder un texte. La préfixitude est assez violente.
+
+--> Caractérisation des codes préfixes 
+	On peut caractériser les codes préfixes avec l'inégalité de Kraft. Un code est préfixe si et seulement si il vérifie l'inégalité de Kraft.
+
+	
+
+
+
+
+
