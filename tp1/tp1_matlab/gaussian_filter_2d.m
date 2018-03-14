@@ -5,5 +5,14 @@ function f=gaussian_filter_2d(sigma)
 % Tip: use the ideas of the 1D Gaussian in intro.m
 % Warning : make sure sum(f(:))==1.
 % Test your code by visualizing f for different sigma (e.g. 1,2 and 10)
+
+int_sigma=ceil(sigma);
+
+x=(-2*int_sigma):(2*int_sigma);
+y=exp(-x.^2/(2*sigma^2));
+
+f = y'*y;
+
+f = f/sum(f(:))
     
 end

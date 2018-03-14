@@ -20,6 +20,6 @@ fz=reshape(fz,[1 1 length(fz)]);
 f=repmat(fz,[size(f_2d,1) size(f_2d,2) 1]).*repmat(f_2d,[1,1,length(fz)]); 
 % .* is the dot product
 
-%f=f./sum(f(:));
+f=f./sum(f(:));
 
 end

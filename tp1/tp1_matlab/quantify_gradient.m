@@ -10,6 +10,13 @@ quant_orientation(orientations_1)=1;% if M is a matrix and B a boolean
 % places where B is true
 
 %% To complete: use the same model for the other orientation bins
+orientations_2 = (orientation>pi/8) & (orientation<=3*pi/8);
+quant_orientation(orientations_2)=2;
 
+orientations_3 = (orientation>-pi/8) & (orientation<=pi/8);
+quant_orientation(orientations_3)=3;
+
+orientations_4 = (orientation>-3*pi/8) & (orientation<=-pi/8);
+quant_orientation(orientations_4)=4;
 
 end

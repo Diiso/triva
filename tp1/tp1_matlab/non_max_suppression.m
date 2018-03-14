@@ -22,9 +22,13 @@ for k=1:length(candidate_edges_i)
     
     %% Part to complete: when is there edges for each orientation?
     if quantified_orientation(i,j)==1
+      nms_edges(i,j) = (dI_norm(i,j)>dI_norm(i,j-1)) & (dI_norm(i,j)>dI_norm(i,j+1));
     elseif quantified_orientation(i,j)==2
+      nms_edges(i,j) = (dI_norm(i,j)>dI_norm(i+1,j-1)) & (dI_norm(i,j)>dI_norm(i-1,j+1));
     elseif quantified_orientation(i,j)==3
+      nms_edges(i,j) = (dI_norm(i,j)>dI_norm(i-1,j)) & (dI_norm(i,j)>dI_norm(i+1,j));
     elseif quantified_orientation(i,j)==4
+      nms_edges(i,j) = (dI_norm(i,j)>dI_norm(i-1,j-1)) & (dI_norm(i,j)>dI_norm(i+1,j+1));
     else
         error('non_max_suppression: the input orientation matrix is not valid\n');
     end

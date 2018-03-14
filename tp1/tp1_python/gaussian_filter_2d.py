@@ -11,6 +11,9 @@ def gaussianFilter2d(sigma):
 
     y = np.arange(-2*int_sigma,2*int_sigma+1,1)
     fy = np.vectorize(gaussian)
-
-    return np.dot(fx(x)[:,None],fy(y)[None,:])
+    
+    f = np.dot(fx(x)[:,None],fy(y)[None,:])
+    f = f/np.sum(f)
+    
+    return f
     

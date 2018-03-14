@@ -1,7 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % TP1: Canny edge detection and Bilateral filter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% if you are not familiar with matlab, look at intro.m first.
 
 %% 1. Beginning with Matlab
 % Read and show an image
@@ -24,6 +23,7 @@ subplot(1,2,1); % divide the figure into a 1x2 array and use the first cell
 imagesc(Irgb);
 axis image off;
 title('RGB image'); % add a title to the first cell
+
 subplot(1,2,2); % use the second cell
 imagesc(I);
 colormap(gray);
@@ -33,18 +33,41 @@ title('B&W image');
 if ~exist('results')
     mkdir('results')
 end
+
 imwrite(I,'results/black_and_white_image.png'); % save the black and white image
-print(1,'results/figure_1.jpg','-djpeg'); % save figure 1
+%print(1,'results/figure_1.jpg','-djpeg'); % save figure 1
 % close(1); in case you want matlab to close figure 1
 
 % add gaussian noise to the image
 sigma_noise=0.1;
 I_noise=I+randn(size(I))*sigma_noise; % This is the blurred image
+
+figure(2);
+
+subplot(1,2,1);
+imagesc(I);
+axis image off;
+colormap(gray);
+title('B&W Image');
+
+subplot(1,2,2);
+imagesc(I_noise);
+axis image off;
+colormap(gray);
+title('Image with Noise');
+
 imwrite(I_noise,'results/image_with_noise.png'); % save the black and white image
+
 
 %% 2. Basic Image Processing
 % Gaussian convolution
-I_blurred=gaussian_convolution(I_noise,3); 
+I_blurred=gaussian_convolution(I,2); 
+figure(3);
+imagesc(I_blurred);
+axis image off;
+colormap(gray);
+title('Blurred Image')
+
 
 
 % Gradients
@@ -52,9 +75,9 @@ I_blurred=gaussian_convolution(I_noise,3);
 
 
 % Visualize thresholded gradients
-threshold=0.02;
+threshold=0.01;
 dI_norm_thresh=dI_norm>threshold;
-figure(2);
+figure(4);
 imagesc(dI_norm_thresh);
 axis image off;
 colormap(gray);
@@ -66,8 +89,8 @@ title(sprintf('Gradients bigger than %.03f',threshold));
 quantified_orientation=quantify_gradient(dI_orientation);
 
 % This is just to check that your results are meaningful, use it!
-orientation=1;
-figure(2);
+orientation=3;
+figure(5);
 imagesc(quantified_orientation==orientation);
 axis image off;
 colormap(gray);
@@ -76,15 +99,24 @@ title(sprintf('Orientations quantified to bin %i',orientation));
 
 % Perform non-max suppression
 nms_edges=non_max_suppression(dI_norm,quantified_orientation,threshold);
-
+figure(6)
+imagesc(nms_edges);
+axis image off;
+colormap(gray);
+title(sprintf('Non-max Supression'));
 
 % Canny edges
 % parameters
 sigma = 2; % Deviation standard du flou gaussien
-s1 = 0.05; % Seuil haut de l'hysteresis
+s1 = 0.01; % Seuil haut de l'hysteresis
 s2 =  0.002; % Seuil bas  de l'hysteresis
 
 edges=canny_edges(I,sigma,s1,s2);
+figure(7)
+imagesc(edges);
+axis image off;
+colormap(gray);
+title(sprintf('Canny Edges Detection'));
 
 %% 4. Bilateral Filter
 
