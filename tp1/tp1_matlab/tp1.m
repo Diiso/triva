@@ -126,7 +126,7 @@ I=get_luminance(Irgb); % get luminance
 rgb_ratio=Irgb./repmat(I,[1 1 3]); % compute image color
 smoothed_image=BF(I,5,0.1);
 output=max(0,min(1,repmat(smoothed_image, [1 1 3]).*rgb_ratio));%
-figure(1)
+figure(8)
 imagesc(output,[0 1]);
 axis image off;
 title('Smoothed image');
